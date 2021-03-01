@@ -2,6 +2,7 @@ package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -247,8 +248,20 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Map<String, Integer> wordCount(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		string = string.toLowerCase();
+
+		Map<String, Integer> mapList = new HashMap<>();
+		String[] wordArray = string.split(" ");
+		for (String word : wordArray) {
+			if (mapList.containsKey(word)) {
+				int count = mapList.get(word);
+				mapList.put(word, count++);
+			} else {
+				mapList.put(word, 1);
+			}
+		}
+
+		return mapList;
 	}
 
 	/**
@@ -290,8 +303,31 @@ public class EvaluationService {
 		private List<T> sortedList;
 
 		public int indexOf(T t) {
-			// TODO Write an implementation for this method declaration
-			return 0;
+			
+			//for(int i=0;i<sortedList.size();i++) {}
+			
+			int first,last,middle,position;
+			boolean found;
+			
+			first=0;
+			last=sortedList.size()-1;
+			position=-1;
+			found=false;
+			
+			while(!found && first<=last) {
+				middle=(first+last)/2;
+				
+				if(sortedList.get(middle).equals(t)) {
+					found=true;
+					position=middle;
+				}
+				else if((sortedList.get(middle)).hashCode()>t.hashCode()) {//***
+					last=middle-1;
+				}else
+					first=middle+1;
+			}			
+			
+			return position;
 		}
 
 		public BinarySearch(List<T> sortedList) {
@@ -381,8 +417,19 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isArmstrongNumber(int input) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		
+		int power,total=0,tempInput;
+		
+		tempInput=input;
+		
+		while(input>0) {
+			power=input%10;
+			//if(input>1000) input=input/100;
+			input=input/10;
+			total=total+(power*power*power);
+		}if(tempInput==total) return true;
+		
+		else return false;
 	}
 
 	/**
@@ -611,7 +658,7 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Temporal getGigasecondDate(Temporal given) {
-		// TODO Write an implementation for this method declaration
+		
 		return null;
 	}
 
@@ -703,10 +750,10 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int solveWordProblem(String string) {
-		int total=0;
+		/*int total=0;
 		String[] word = string.split(" ");
 		int num1 = Integer.parseInt(word[2]);
-		String numberStr = "";
+		String numberStr = " ";
 		
 			for (int i=0; i<word[4].length(); i++) {
 				numberStr += word[4].charAt(i);
@@ -729,20 +776,24 @@ public class EvaluationService {
 						}
 						total = (num1)+(num2);
 					}
-					 if (word[3].equals("minus")) { 						
+					else if (word[3].equals("minus")) { 						
 						if(num2<0) { total=num1+num2;}
 						else {total = (num1)-(num2);}
 						}
-					 else if (word[3].equals("multiplied")) {						 
+					 else if (word[3].equals("multiplied")) {
+						 	numberStr += word[5].charAt(i);
+							num2 = Integer.parseInt(numberStr);
 							total= num1*num2;
 							
 					 }
-					 else if (word[3].equals("divided")) {						
+					 else if (word[3].equals("divided")) {	
+						 numberStr += word[5].charAt(i);
+							num2 = Integer.parseInt(numberStr);
 							total = num1/num2;						 
 					 }			
 				}
-			}			
-			return total;
+			}*/			
+			return 0;
 		}
 	
 
